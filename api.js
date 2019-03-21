@@ -47,7 +47,7 @@ export class EdenApis {
     async getCoinServerAddress(iamtoken){
         let jr = this.getDefaultJson(GET_SERVER_CS_ADDRESS, iamtoken)
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess && resp.data.result.err_code==0)
+        if(resp.isSuccess &&  jr.id == resp.data.id && resp.data.result.err_code==0)
         {
             return resp.data.result.data.hdaddress;
         }
@@ -64,7 +64,7 @@ export class EdenApis {
     async getUserBalance(iamtoken){
         let jr = this.getDefaultJson(GET_USER_BALANCE, iamtoken)
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess  && resp.data.result.err_code==0 )
+        if(resp.isSuccess  && jr.id == resp.data.id && resp.data.result.err_code==0 )
         {
             return resp.data.result.data.amount;
         }
@@ -81,7 +81,7 @@ export class EdenApis {
     {
         let jr = this.getDefaultJson(EIAM_GET_USER_INFO, iamtoken)
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess && resp.data.result.err_code==0 )
+        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0 )
         {
             return resp.data.result.data;
         }
@@ -99,7 +99,7 @@ export class EdenApis {
         let jr = this.getDefaultJson(EIAM_SIGN_IN, iamtoken)
         
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess && resp.data.result.err_code==0 )
+        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0 )
         {
             return true;
         }
@@ -116,7 +116,7 @@ export class EdenApis {
     {
         let jr = this.getDefaultJson(EIAM_SIGN_OUT, iamtoken)
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess && resp.data.result.err_code==0)
+        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
         {
             return true;
         }
@@ -142,7 +142,7 @@ export class EdenApis {
         jr.params.countperpage = countperpage;
 
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess && resp.data.result.err_code==0)
+        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
         {
             return resp.data.result.data;
         }
@@ -165,7 +165,7 @@ export class EdenApis {
         jr.params.signature = address.signature;
 
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess && resp.data.result.err_code==0)
+        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
         {
             return true;
         }
@@ -188,7 +188,7 @@ export class EdenApis {
        jr.params.signature = address.signature;
 
        let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-       if(resp.isSuccess && resp.data.result.err_code==0)
+       if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
        {
            return true;
        }
@@ -210,7 +210,7 @@ export class EdenApis {
         jr.params.txhash = txhash;
 
         let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-        if(resp.isSuccess && resp.data.result.err_code==0)
+        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
         {
             return true;
         }
@@ -234,7 +234,7 @@ export class EdenApis {
        jr.params.amount = amount.toString();
 
        let resp = await axInstance.post(JSON_RPC_API_URL,jr);
-       if(resp.isSuccess && resp.data.result.err_code==0)
+       if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
        {
            return true;
        }
