@@ -236,10 +236,10 @@ export class EdenApis {
        let resp = await axInstance.post(JSON_RPC_API_URL,jr);
        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
        {
-           return true;
+            return resp.data.result.data.txhash;
        }
        else
-           return false;
+            return undefined;
    }
 
 

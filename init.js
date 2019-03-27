@@ -30,7 +30,6 @@ export function initApp(config_index){
     {
         return false;
     }
- 
     
     return  true;
 }

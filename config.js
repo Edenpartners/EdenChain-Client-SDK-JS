@@ -8,13 +8,8 @@ const eden_configs = [
 
     }, // MainNet
     {
-    apiKey: "AIzaSyAxk1aIqRAd4hiaOPHexj3vFXo0gmeEDDE",
-    authDomain: "eiam-695f7.firebaseapp.com",
-    databaseURL: "https://eiam-695f7.firebaseio.com",
-    projectId: "eiam-695f7",
-    storageBucket: "eiam-695f7.appspot.com",
-    messagingSenderId: "811177682224",
-    }, // Test Prototype 
+        apiKey: "AIzaSyCxBr_r3Q7d2letGIezVoO0cah0TtdZSeA",
+    }, // MainNet BR
 ];
 
 // api end point
@@ -23,7 +18,7 @@ const eden_api_endpoints= [
 
     }, // MainNet
     {
-        url: "https://104.197.252.130/api"
+        url: "https://api-ep-br.edenchain.io/api"        
     }, // Test Prototype
 ];
 

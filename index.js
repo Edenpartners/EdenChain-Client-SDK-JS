@@ -7,8 +7,9 @@ import {Utils} from './utils';
 import {initApp} from './init';
 
 // Network defines
-const EDEN_MAINNET_NETWORK = 0;
-const EDEN_PROTOTYPE_NETWORK = 1;
+const EDENCHAIN_MAINNET_NETWORK = 0;
+const EDENCHAIN_BETA_RELEASE = 1;
+const EDENCHAIN_CANDIDATE_RELEASE = 1;
 
 // declare singleton class
 class edensdk {
@@ -28,15 +29,60 @@ class edensdk {
         // Api objects
         this.apis            = new EdenApis();
         this.utils           = new Utils();
+
+        // callback function
+        this.authCallback = undefined;
     }
 
     // network constant export 
-    get EDEN_MAINNET_NETWORK() {
-        return EDEN_MAINNET_NETWORK;
+    get EDENCHAIN_MAINNET_NETWORK() {
+        return EDENCHAIN_MAINNET_NETWORK;
     }
 
-    get EDEN_PROTOTYPE_NETWORK() {
-        return EDEN_PROTOTYPE_NETWORK;
+    get EDENCHAIN_BETA_RELEASE() {
+        return EDENCHAIN_BETA_RELEASE;
+    }
+
+    get EDENCHAIN_CANDIDATE_RELEASE(){
+        return EDENCHAIN_CANDIDATE_RELEASE;
+    }
+
+    OnAuthChanged(callback) {
+        if(this.app)
+        {
+            this.app.auth().onAuthStateChanged(
+                async (user)=> {
+                    let idToken = undefined;
+                    if (user)
+                    {
+                        idToken =  await user.getIdToken();
+
+                        // 
+                        this.apis.signInUser(idToken).then((value)=>{
+                            callback(idToken);
+                        }).catch( (error)=>{           
+                                this.app.auth().signOut().then( (value)=>{
+                                    callback(undefined);
+                                }
+                                );
+                            }                         
+                        );
+                    }
+                    else
+                    {
+                        this.apis.signOutUser(idToken).then(
+                            (value) => {
+                                callback(undefined);
+                            }
+                        )
+                    }
+                }
+            );
+
+            return true;
+        }
+        else
+            return false;
     }
 };
 
