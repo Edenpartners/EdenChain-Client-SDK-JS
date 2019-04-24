@@ -9,7 +9,7 @@ import {initApp} from './init';
 // Network defines
 const EDENCHAIN_MAINNET_NETWORK = 0;
 const EDENCHAIN_BETA_RELEASE = 1;
-const EDENCHAIN_CANDIDATE_RELEASE = 1;
+const EDENCHAIN_CANDIDATE_RELEASE = 2;
 
 // declare singleton class
 class edensdk {

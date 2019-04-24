@@ -10,6 +10,9 @@ const eden_configs = [
     {
         apiKey: "AIzaSyCxBr_r3Q7d2letGIezVoO0cah0TtdZSeA",
     }, // MainNet BR
+    {
+        apiKey: "AIzaSyCzikLXq4FVcZGRBTIWAZCe_V37ZnbRlww",
+    } // MainNet CR
 ];
 
 // api end point
@@ -19,7 +22,10 @@ const eden_api_endpoints= [
     }, // MainNet
     {
         url: "https://api-ep-br.edenchain.io/api"        
-    }, // Test Prototype
+    }, // Beta Release
+    {
+        url: "https://api-ep-cr.edenchain.io/api"        
+    }, // Candidate Release
 ];
 
 let config_position = -1;

@@ -14,6 +14,7 @@ const EIAM_GET_USER_INFO = "user.get_info";
 
 const GET_USER_BALANCE= "user.getbalance";
 const GET_USER_TRANSACTION_LIST = "user.lstransaction";
+const TRANSFER_TOKEN = "user.transfer";
 
 const DEPOSIT_TOKEN_TO_EDEN="user.deposit";
 const WITHRAW_TOKEN_FROM_EDEN="user.withdraw";
@@ -223,7 +224,7 @@ export class EdenApis {
         @param iamtoken
                 ethaddress for ethereum address for receive EDN token.
                 amount for Eden chain Token to withdraw as string.
-        @return boolean
+        @return boolean or ethereum tx hash
     */
    async withdrawTokenFromEdenChain(iamtoken,ethaddress, amount)
    {
@@ -241,6 +242,31 @@ export class EdenApis {
        else
             return undefined;
    }
+
+    /*
+        Transfer token to another user
+        @prarm iamtoken
+                tedn_address for receiving TEDN token.
+                amount for TEDN amount to transfer
+        @return boolean or tedn transaction hash
+    */
+   async transferToken(iamtoken, receive_tedn_address, amount)
+   {
+        let jr = this.getDefaultJson(TRANSFER_TOKEN, iamtoken)
+
+        // update additional parameter
+        jr.params.receive_tedn_address  = receive_tedn_address;
+        jr.params.amount = amount.toString();
+
+        let resp = await axInstance.post(JSON_RPC_API_URL,jr);
+        if(resp.isSuccess && jr.id == resp.data.id && resp.data.result.err_code==0)
+        {
+            return resp.data.result.data.tx_id;
+        }
+        else
+            return undefined;
+   }
+
 
 
 };
